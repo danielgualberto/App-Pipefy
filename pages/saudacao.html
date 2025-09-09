@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: white;
+        }
+        .greeting-container {
+            text-align: center;
+            padding: 20px;
+        }
+        .greeting-animation {
+            font-size: 4em;
+            animation: wave 1s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            75% { transform: rotate(-20deg); }
+        }
+        .language-selector {
+            margin: 20px 0;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .greeting-text {
+            font-size: 1.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+        .fun-fact {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting-container">
+        <div class="greeting-animation">👋</div>
+        
+        <h2>Saudações do Mundo!</h2>
+        
+        <div class="language-selector">
+            <label for="language">Escolha um idioma:</label>
+            <select id="language" onchange="changeGreeting()">
+                <option value="pt">Português</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="ja">日本語</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+        
+        <div class="greeting-text" id="greetingText">
+            Olá, Mundo! 🌍
+        </div>
+        
+        <div class="fun-fact">
+            <strong>💡 Curiosidade:</strong>
+            <p id="funFact">O "Hello, World!" é tradicionalmente o primeiro programa que aprendemos em uma nova linguagem de programação!</p>
+        </div>
+    </div>
+
+    <script>
+        const greetings = {
+            pt: { text: 'Olá, Mundo! 🌍', fact: 'O "Olá, Mundo!" foi usado pela primeira vez em 1972 no livro de Brian Kernighan.' },
+            en: { text: 'Hello, World! 🌎', fact: '"Hello, World!" was first used in 1972 in Brian Kernighan\'s book.' },
+            es: { text: '¡Hola, Mundo! 🌏', fact: '¡"Hola, Mundo!" es el programa más famoso en la historia de la programación!' },
+            fr: { text: 'Bonjour, le Monde! 🌍', fact: '"Bonjour, le Monde!" est la tradition dans l\'apprentissage de la programmation.' },
+            de: { text: 'Hallo, Welt! 🌎', fact: '"Hallo, Welt!" ist das berühmteste Programm der Welt.' },
+            it: { text: 'Ciao, Mondo! 🌏', fact: '"Ciao, Mondo!" è il primo passo nell\'apprendimento della programmazione.' },
+            ja: { text: 'こんにちは、世界！ 🌍', fact: '「ハロー、ワールド！」はプログラミングの伝統です。' },
+            zh: { text: '你好，世界！ 🌎', fact: '"你好，世界！"是编程学习的第一步。' }
+        };
+
+        function changeGreeting() {
+            const language = document.getElementById('language').value;
+            const greeting = greetings[language];
+            
+            document.getElementById('greetingText').textContent = greeting.text;
+            document.getElementById('funFact').textContent = greeting.fact;
+            
+            // Animação de mudança
+            const textElement = document.getElementById('greetingText');
+            textElement.style.animation = 'none';
+            setTimeout(() => {
+                textElement.style.animation = 'fadeIn 0.5s';
+            }, 10);
+        }
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>

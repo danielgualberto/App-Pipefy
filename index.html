@@ -2,49 +2,30 @@
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
-    <title>Olá Mundo - Pipefy App</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f5f7fa;
-        }
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-    </style>
+    <title>Olá Mundo - Inicialização</title>
 </head>
 <body>
-    <div class="loading">
-        <h2>🚀 Inicializando App Olá Mundo...</h2>
-        <p>Carregando recursos do Pipefy...</p>
-    </div>
-
-    <!-- Pipefy Client SDK -->
+    <!-- Pipefy Apps SDK.js -->
     <script src="https://platform.staticpipefy.com/pipefy-app.js"></script>
-    
     <script>
-        // Inicialização do App
+        // Inicializar SDK
+        var pipefyClient;
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            pipefyClient = PipefyApp.init();
+            console.log('✅ SDK Pipefy inicializado');
+        });
+
+        // Configurar features do app
         PipefyApp.initCall({
-            
-            // 🎯 PIPE BUTTONS - Botão no topo do Pipe
-            'pipe-buttons': function(p, pipe) {
-                return [
-                    {
-                        icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
-                        text: 'Olá Mundo',
-                        callback: function(p) {
-                            // Abre sidebar com o painel principal
-                            p.sidebar({
-                                title: '🌍 Olá Mundo - Painel Principal',
-                                url: './pages/main-panel.html'
-                            });
-                        }
-                    }
-                ];
+            // 🎯 PIPE VIEW - Página interna no Pipe
+            'pipe-view': function(p, pipe) {
+                return {
+                    icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
+                    text: 'Olá Mundo',
+                    url: './pipe-view.html',
+                    hide_create_button: false
+                };
             },
             
             // 🎨 CARD BUTTONS - Botões no Card
@@ -54,11 +35,9 @@
                         icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                         text: 'Olá Card',
                         callback: function(p) {
-                            // Abre sidebar específica do card
-                            p.sidebar({
-                                title: '🎴 Detalhes do Card',
-                                url: './pages/card-details.html'
-                            });
+                            // Ação direta sem modal/sidebar
+                            alert('👋 Olá do Card #' + p.card.id + '!');
+                            console.log('Card atual:', p.card);
                         }
                     }
                 ];
@@ -68,19 +47,14 @@
             'card-badges': function(p, pipe) {
                 return [
                     {
-                        text: '👋 Olá!',
+                        text: '👋 Olá',
                         color: '#4CAF50',
                         title: 'Badge de saudação'
                     },
                     {
-                        text: '⭐ Demo',
-                        color: '#FF9800',
-                        title: 'App demonstrativo'
-                    },
-                    {
-                        text: '🚀 v1.0',
-                        color: '#2196F3',
-                        title: 'Versão do app'
+                        text: '🌍 Mundo',
+                        color: '#2196F3', 
+                        title: 'Badge mundial'
                     }
                 ];
             },
@@ -88,34 +62,28 @@
             // 📑 CARD TAB - Nova aba no Card
             'card-tab': function(p, pipe) {
                 return {
-                    icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                     title: 'Olá Mundo',
-                    url: './pages/hello-tab.html',
+                    icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
+                    url: './card-tab.html',
+                    claimedAttachments: function(attachments) {
+                        // Filtrar anexos do app (se houver)
+                        return attachments.filter(function(attachment) {
+                            return attachment.url.indexOf('hello-world-app') >= 0;
+                        });
+                    },
                     buttons: [
                         {
-                            text: 'Testar Função',
+                            text: 'Testar',
                             callback: function(p) {
-                                p.showNotification('✅ Teste executado com sucesso!');
-                            }
-                        },
-                        {
-                            text: 'Abrir Ajuda',
-                            callback: function(p) {
-                                p.modal({
-                                    title: '📚 Ajuda',
-                                    url: './pages/help.html',
-                                    height: 400
-                                });
+                                alert('✅ Teste da aba executado!');
                             }
                         }
                     ]
                 };
             }
         });
-        
-        // Log de confirmação
-        console.log('✅ App Olá Mundo inicializado!');
-        console.log('📍 Features registradas: pipe-buttons, card-buttons, card-badges, card-tab');
+
+        console.log('🚀 App Olá Mundo configurado com sucesso!');
     </script>
 </body>
 </html>

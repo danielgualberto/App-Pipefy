@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Aba Olá Mundo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: white;
+        }
+        
+        .tab-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .content-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li span {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        button {
+            background: #0081ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0066cc;
+        }
+        
+        #cardOutput {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .info-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0081ff;
+        }
+        
+        .info-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-header">
+        <h2>🌍 Olá, Mundo - Card Tab</h2>
+        <p>Aba personalizada para demonstração</p>
+    </div>
+
+    <div class="content-section">
+        <h3>✨ Recursos da Aba</h3>
+        <ul class="feature-list">
+            <li>
+                <span>📝</span>
+                <div>
+                    <strong>Anotações</strong><br>
+                    <small>Adicione observações importantes ao card</small>
+                </div>
+            </li>
+            <li>
+                <span>📊</span>
+                <div>
+                    <strong>Estatísticas</strong><br>
+                    <small>Visualize métricas e dados do card</small>
+                </div>
+            </li>
+            <li>
+                <span>🔗</span>
+                <div>
+                    <strong>Integrações</strong><br>
+                    <small>Conecte com outros serviços</small>
+                </div>
+            </li>
+            <li>
+                <span>🏷️</span>
+                <div>
+                    <strong>Tags</strong><br>
+                    <small>Organize com etiquetas personalizadas</small>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h3>📊 Informações do Card</h3>
+        <div class="info-grid">
+            <div class="info-box">
+                <div class="info-value" id="cardActions">0</div>
+                <div class="info-label">Ações</div>
+            </div>
+            <div class="info-box">
+                <div class="info-value" id="cardTime">0s</div>
+                <div class="info-label">Tempo</div>
+            </div>
+            <div class="info-box">
+                <div class="info-value" id="cardDate">--</div>
+                <div class="info-label">Data</div>
+            </div>
+            <div class="info-box">
+                <div class="info-value" id="cardStatus">✅</div>
+                <div class="info-label">Status</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h3>🧪 Área de Testes</h3>
+        <p>Experimente as funcionalidades da aba:</p>
+        
+        <div class="test-buttons">
+            <button onclick="testHello()">👋 Saudação</button>
+            <button onclick="testData()">📊 Dados</button>
+            <button onclick="testRandom()">🎲 Aleatório</button>
+            <button onclick="testTime()">⏰ Tempo</button>
+            <button onclick="testClear()">🧹 Limpar</button>
+        </div>
+        
+        <div id="cardOutput"></div>
+    </div>
+
+    <script>
+        let actionCount = 0;
+        let tabStartTime = Date.now();
+        
+        // Atualizar informações
+        function updateCardInfo() {
+            const seconds = Math.floor((Date.now() - tabStartTime) / 1000);
+            document.getElementById('cardTime').textContent = seconds + 's';
+            
+            const now = new Date();
+            document.getElementById('cardDate').textContent = now.toLocaleDateString('pt-BR');
+        }
+        
+        setInterval(updateCardInfo, 1000);
+        updateCardInfo();
+        
+        // Funções de teste
+        function addCardOutput(message) {
+            actionCount++;
+            document.getElementById('cardActions').textContent = actionCount;
+            
+            const output = document.getElementById('cardOutput');
+            const timestamp = new Date().toLocaleTimeString('pt-BR');
+            output.textContent += `[${timestamp}] ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function testHello() {
+            const greetings = [
+                '👋 Olá, Mundo!',
+                '🌍 Hello, World!',
+                '🌎 ¡Hola, Mundo!',
+                '🌏 你好，世界！'
+            ];
+            const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+            addCardOutput(greeting);
+        }
+        
+        function testData() {
+            const data = {
+                id: Math.floor(Math.random() * 1000),
+                timestamp: new Date().toISOString(),
+                status: 'active'
+            };
+            addCardOutput(`📊 Dados: ${JSON.stringify(data, null, 2)}`);
+        }
+        
+        function testRandom() {
+            const random = Math.floor(Math.random() * 100);
+            addCardOutput(`🎲 Número aleatório: ${random}`);
+            
+            // Atualizar status com emoji aleatório
+            const emojis = ['✅', '⭐', '🚀', '💡', '🎯'];
+            document.getElementById('cardStatus').textContent = 
+                emojis[Math.floor(Math.random() * emojis.length)];
+        }
+        
+        function testTime() {
+            const now = new Date();
+            addCardOutput(`⏰ Horário: ${now.toLocaleString('pt-BR')}`);
+        }
+        
+        function testClear() {
+            document.getElementById('cardOutput').textContent = '';
+            addCardOutput('🧹 Output limpo!');
+        }
+        
+        // Mensagem inicial
+        addCardOutput('🚀 Aba carregada com sucesso!');
+        addCardOutput('💡 Clique nos botões para testar');
+    </script>
+</body>
+</html>

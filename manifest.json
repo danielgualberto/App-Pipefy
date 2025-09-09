@@ -1,16 +1,13 @@
 {
   "name": "Olá Mundo App",
   "short_description": "App demonstrativo com todos os recursos Pipefy",
-  "description": "Este app demonstra todas as funcionalidades disponíveis: pipe-buttons, card-buttons, card-badges e card-tab. Perfeito para aprender! 🚀",
-  "icon": "https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359",
-  "author": "Daniel Gualberto",
-  "init_url": "./index.html",
-  "screenshots": [
-    "https://placehold.co/600x400?text=Demo%201",
-    "https://placehold.co/600x400?text=Demo%202"
-  ],
+  "description": "Este app demonstra todas as funcionalidades disponíveis do Pipefy. Perfeito para aprender! 🚀",
+  "icon": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f30d.svg",
+  "author": "Seu Nome",
+  "init_url": "./",
+  "screenshots": [],
   "features": [
-    "pipe-buttons",
+    "pipe-view",
     "card-buttons",
     "card-badges",
     "card-tab"

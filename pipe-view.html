@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Olá Mundo - Pipe View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .stats-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #0081ff;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #0081ff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0066cc;
+        }
+        
+        button.secondary {
+            background: #6c757d;
+        }
+        
+        button.secondary:hover {
+            background: #5a6268;
+        }
+        
+        button.success {
+            background: #28a745;
+        }
+        
+        button.success:hover {
+            background: #218838;
+        }
+        
+        #output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .lang-badge {
+            background: #e9ecef;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .lang-badge.active {
+            background: #0081ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div class="header">
+            <h1>🌍 Olá, Mundo!</h1>
+            <p>Bem-vindo ao app demonstrativo do Pipefy</p>
+        </div>
+
+        <!-- Cards de Funcionalidades -->
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Dashboard</h3>
+                <p>Visualize estatísticas e métricas em tempo real do seu pipe.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Personalização</h3>
+                <p>Configure cores, temas e preferências do seu ambiente.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Ferramentas</h3>
+                <p>Acesse utilitários e recursos avançados para otimizar seu fluxo.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3>Documentação</h3>
+                <p>Aprenda a usar todos os recursos disponíveis no app.</p>
+            </div>
+        </div>
+
+        <!-- Seção de Estatísticas -->
+        <div class="stats-section">
+            <h2>📈 Estatísticas em Tempo Real</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="counter">0</div>
+                    <div class="stat-label">Cliques</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="timer">0s</div>
+                    <div class="stat-label">Tempo Ativo</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="date">--</div>
+                    <div class="stat-label">Data</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="time">--:--</div>
+                    <div class="stat-label">Hora</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Testes -->
+        <div class="test-section">
+            <h2>🧪 Área de Testes Interativos</h2>
+            
+            <h3>Saudações em Diferentes Idiomas:</h3>
+            <div class="languages">
+                <span class="lang-badge active" onclick="setLanguage('pt', this)">🇧🇷 Português</span>
+                <span class="lang-badge" onclick="setLanguage('en', this)">🇺🇸 English</span>
+                <span class="lang-badge" onclick="setLanguage('es', this)">🇪🇸 Español</span>
+                <span class="lang-badge" onclick="setLanguage('fr', this)">🇫🇷 Français</span>
+                <span class="lang-badge" onclick="setLanguage('de', this)">🇩🇪 Deutsch</span>
+                <span class="lang-badge" onclick="setLanguage('it', this)">🇮🇹 Italiano</span>
+                <span class="lang-badge" onclick="setLanguage('ja', this)">🇯🇵 日本語</span>
+                <span class="lang-badge" onclick="setLanguage('zh', this)">🇨🇳 中文</span>
+            </div>
+
+            <h3 style="margin-top: 30px;">Ações de Teste:</h3>
+            <div class="button-group">
+                <button onclick="sayHello()">👋 Dizer Olá</button>
+                <button onclick="showInfo()">ℹ️ Mostrar Info</button>
+                <button onclick="randomEmoji()">🎲 Emoji Aleatório</button>
+                <button onclick="testAnimation()">✨ Animação</button>
+                <button class="secondary" onclick="clearOutput()">🧹 Limpar</button>
+                <button class="success" onclick="showSuccess()">✅ Sucesso</button>
+            </div>
+            
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let clickCount = 0;
+        let startTime = Date.now();
+        let currentLang = 'pt';
+        
+        // Saudações
+        const greetings = {
+            pt: 'Olá, Mundo!',
+            en: 'Hello, World!',
+            es: '¡Hola, Mundo!',
+            fr: 'Bonjour, le Monde!',
+            de: 'Hallo, Welt!',
+            it: 'Ciao, Mondo!',
+            ja: 'こんにちは、世界！',
+            zh: '你好，世界！'
+        };
+
+        // Atualizar estatísticas
+        function updateStats() {
+            // Atualizar timer
+            const seconds = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('timer').textContent = seconds + 's';
+            
+            // Atualizar data e hora
+            const now = new Date();
+            document.getElementById('date').textContent = now.toLocaleDateString('pt-BR');
+            document.getElementById('time').textContent = now.toLocaleTimeString('pt-BR');
+        }
+
+        // Atualizar a cada segundo
+        setInterval(updateStats, 1000);
+        updateStats();
+
+        // Funções de teste
+        function addToOutput(message) {
+            clickCount++;
+            document.getElementById('counter').textContent = clickCount;
+            
+            const output = document.getElementById('output');
+            const time = new Date().toLocaleTimeString('pt-BR');
+            output.innerHTML += `[${time}] ${message}<br>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function sayHello() {
+            addToOutput(`👋 ${greetings[currentLang]}`);
+        }
+
+        function showInfo() {
+            const info = {
+                app: 'Olá Mundo',
+                versao: '1.0.0',
+                autor: 'Desenvolvedor',
+                framework: 'Pipefy Apps'
+            };
+            addToOutput(`ℹ️ Info: ${JSON.stringify(info)}`);
+        }
+
+        function randomEmoji() {
+            const emojis = ['😀', '🎉', '🚀', '⭐', '💡', '🌈', '🔥', '💎', '🎯', '🏆'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            addToOutput(`🎲 Emoji sorteado: ${emoji}`);
+        }
+
+        function testAnimation() {
+            const header = document.querySelector('.header');
+            header.style.animation = 'pulse 1s';
+            setTimeout(() => header.style.animation = '', 1000);
+            addToOutput('✨ Animação executada no cabeçalho!');
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+            addToOutput('🧹 Output limpo!');
+        }
+
+        function showSuccess() {
+            addToOutput('✅ Operação concluída com sucesso!');
+            
+            // Criar notificação visual
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 6px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideIn 0.3s;
+            `;
+            notification.textContent = '✅ Sucesso!';
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        function setLanguage(lang, element) {
+            currentLang = lang;
+            
+            // Atualizar visual dos badges
+            document.querySelectorAll('.lang-badge').forEach(badge => {
+                badge.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            addToOutput(`🌐 Idioma alterado para: ${lang.toUpperCase()}`);
+        }
+
+        // Mensagem inicial
+        addToOutput('🚀 App Olá Mundo carregado com sucesso!');
+        addToOutput(`👋 ${greetings[currentLang]}`);
+    </script>
+
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+</html>

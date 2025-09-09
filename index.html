@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>Olá Mundo - Inicialização</title>
+    <title>Olá Mundo Init</title>
 </head>
 <body>
-    <!-- Pipefy Apps SDK.js -->
+    <div style="padding: 20px; text-align: center;">
+        <h2>Inicializando App...</h2>
+    </div>
+
+    <!-- Pipefy Client SDK -->
     <script src="https://platform.staticpipefy.com/pipefy-app.js"></script>
     <script>
-        // Inicializar SDK
-        var pipefyClient;
-        
-        document.addEventListener('DOMContentLoaded', function () {
-            pipefyClient = PipefyApp.init();
-            console.log('✅ SDK Pipefy inicializado');
-        });
+        console.log('🚀 Iniciando App Olá Mundo...');
 
-        // Configurar features do app
         PipefyApp.initCall({
-            // 🎯 PIPE VIEW - Página interna no Pipe
+            // PIPE VIEW - Botão e página no Pipe
             'pipe-view': function(p, pipe) {
+                console.log('📍 Configurando pipe-view para pipe:', pipe);
                 return {
                     icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                     text: 'Olá Mundo',
@@ -28,54 +26,59 @@
                 };
             },
             
-            // 🎨 CARD BUTTONS - Botões no Card
-            'card-buttons': function(p, pipe) {
+            // CARD BUTTONS - Botões no Card
+            'card-buttons': function(p, pipe, card) {
+                console.log('🎨 Adicionando botão ao card');
                 return [
                     {
                         icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                         text: 'Olá Card',
                         callback: function(p) {
-                            // Ação direta sem modal/sidebar
-                            alert('👋 Olá do Card #' + p.card.id + '!');
-                            console.log('Card atual:', p.card);
+                            // Criar uma notificação simples
+                            const notification = document.createElement('div');
+                            notification.innerHTML = '👋 Olá do Card!';
+                            notification.style.cssText = 'position:fixed;top:20px;right:20px;background:#4CAF50;color:white;padding:15px;border-radius:5px;z-index:9999';
+                            document.body.appendChild(notification);
+                            setTimeout(() => notification.remove(), 3000);
+                            
+                            console.log('Card clicado:', card);
                         }
                     }
                 ];
             },
             
-            // 🏷️ CARD BADGES - Badges do Card
-            'card-badges': function(p, pipe) {
+            // CARD BADGES - Etiquetas que aparecem NA LISTAGEM dos cards
+            'card-badges': function(p, pipe, card) {
+                console.log('🏷️ Adicionando badges ao card');
+                // Estes badges aparecem como pequenas etiquetas coloridas
+                // na visualização do pipe (kanban ou lista)
                 return [
                     {
-                        text: '👋 Olá',
-                        color: '#4CAF50',
-                        title: 'Badge de saudação'
+                        text: 'Olá',
+                        color: '#4CAF50', // Verde
+                        title: 'Este é um badge de demonstração'
                     },
                     {
-                        text: '🌍 Mundo',
-                        color: '#2196F3', 
-                        title: 'Badge mundial'
+                        text: '🌍',
+                        color: '#2196F3', // Azul
+                        title: 'Badge com emoji'
                     }
                 ];
             },
             
-            // 📑 CARD TAB - Nova aba no Card
-            'card-tab': function(p, pipe) {
+            // CARD TAB - Nova aba dentro do Card
+            'card-tab': function(p, pipe, card) {
+                console.log('📑 Configurando aba do card');
                 return {
-                    title: 'Olá Mundo',
                     icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
+                    title: 'Olá Mundo',
                     url: './card-tab.html',
-                    claimedAttachments: function(attachments) {
-                        // Filtrar anexos do app (se houver)
-                        return attachments.filter(function(attachment) {
-                            return attachment.url.indexOf('hello-world-app') >= 0;
-                        });
-                    },
                     buttons: [
                         {
-                            text: 'Testar',
+                            text: 'Botão Teste',
                             callback: function(p) {
-                                alert('✅ Teste da aba executado!');
+                                console.log('Botão da aba clicado!');
+                                alert('✅ Botão da aba funcionando!');
                             }
                         }
                     ]
@@ -83,7 +86,7 @@
             }
         });
 
-        console.log('🚀 App Olá Mundo configurado com sucesso!');
+        console.log('✅ App configurado com sucesso!');
     </script>
 </body>
 </html>

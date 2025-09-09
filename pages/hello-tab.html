@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Aba Olá Mundo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: white;
+        }
+        .welcome-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .feature-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .feature-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        .test-area {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        button {
+            background: #0081ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0066cc;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-box">
+        <h1>👋 Olá, Mundo!</h1>
+        <p>Esta é a aba customizada do seu card</p>
+    </div>
+
+    <div class="feature-list">
+        <h3>✨ Recursos desta aba:</h3>
+        <div class="feature-item">
+            <span class="feature-icon">📝</span>
+            <div>
+                <strong>Anotações</strong><br>
+                <small>Adicione notas e observações ao card</small>
+            </div>
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">🔗</span>
+            <div>
+                <strong>Links Úteis</strong><br>
+                <small>Gerencie links relacionados</small>
+            </div>
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">📊</span>
+            <div>
+                <strong>Métricas</strong><br>
+                <small>Visualize estatísticas do card</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-area">
+        <h3>🧪 Área de Testes Interativos</h3>
+        <p>Clique nos botões para testar as funcionalidades:</p>
+        
+        <button onclick="testeHello()">👋 Dizer Olá</button>
+        <button onclick="testeContador()">🔢 Contar</button>
+        <button onclick="testeHora()">⏰ Mostrar Hora</button>
+        <button onclick="testeCor()">🎨 Mudar Cor</button>
+        <button onclick="testeLimpar()">🧹 Limpar</button>
+        
+        <div id="output"></div>
+    </div>
+
+    <script>
+        let contador = 0;
+        const output = document.getElementById('output');
+
+        function addOutput(message) {
+            const time = new Date().toLocaleTimeString('pt-BR');
+            output.innerHTML += `[${time}] ${message}<br>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function testeHello() {
+            const saudacoes = ['Olá!', 'Oi!', 'E aí!', 'Salve!', 'Fala!'];
+            const saudacao = saudacoes[Math.floor(Math.random() * saudacoes.length)];
+            addOutput(`👋 ${saudacao} Seja bem-vindo!`);
+        }
+
+        function testeContador() {
+            contador++;
+            addOutput(`🔢 Contador: ${contador}`);
+        }
+
+        function testeHora() {
+            const agora = new Date();
+            addOutput(`⏰ Hora atual: ${agora.toLocaleString('pt-BR')}`);
+        }
+
+        function testeCor() {
+            const cores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+            const cor = cores[Math.floor(Math.random() * cores.length)];
+            output.style.backgroundColor = cor;
+            addOutput(`🎨 Cor de fundo alterada para: ${cor}`);
+        }
+
+        function testeLimpar() {
+            output.innerHTML = '';
+            contador = 0;
+            output.style.backgroundColor = '#f5f5f5';
+            addOutput('🧹 Área limpa!');
+        }
+
+        // Mensagem inicial
+        addOutput('🚀 Aba carregada com sucesso!');
+        addOutput('💡 Clique nos botões acima para testar');
+    </script>
+</body>
+</html>

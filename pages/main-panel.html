@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Painel Principal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: white;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .menu-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .menu-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .menu-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .menu-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .info-section {
+            background: #e8f4fd;
+            border-left: 4px solid #0081ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0081ff;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Olá, Mundo!</h1>
+        <p>Bem-vindo ao Painel Principal do App</p>
+    </div>
+
+    <div class="info-section">
+        <h3>📋 Menu de Funcionalidades</h3>
+        <p>Clique em uma opção para explorar:</p>
+    </div>
+
+    <div class="menu-grid">
+        <div class="menu-item" onclick="showSection('greeting')">
+            <div class="menu-icon">👋</div>
+            <div class="menu-title">Saudações</div>
+            <small>Mensagens em vários idiomas</small>
+        </div>
+        
+        <div class="menu-item" onclick="showSection('stats')">
+            <div class="menu-icon">📊</div>
+            <div class="menu-title">Estatísticas</div>
+            <small>Dados e métricas</small>
+        </div>
+        
+        <div class="menu-item" onclick="showSection('config')">
+            <div class="menu-icon">⚙️</div>
+            <div class="menu-title">Configurações</div>
+            <small>Personalize o app</small>
+        </div>
+        
+        <div class="menu-item" onclick="showSection('help')">
+            <div class="menu-icon">❓</div>
+            <div class="menu-title">Ajuda</div>
+            <small>Documentação e suporte</small>
+        </div>
+    </div>
+
+    <div id="greeting-section" style="display: none;">
+        <h3>🌐 Olá em diferentes idiomas:</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">Hello</div>
+                <div class="stat-label">Inglês</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">Hola</div>
+                <div class="stat-label">Espanhol</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">Bonjour</div>
+                <div class="stat-label">Francês</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">你好</div>
+                <div class="stat-label">Chinês</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stats-section" style="display: none;">
+        <h3>📈 Estatísticas do App:</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value" id="clickCount">0</div>
+                <div class="stat-label">Cliques</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="timeActive">0s</div>
+                <div class="stat-label">Tempo Ativo</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clicks = 0;
+        let startTime = Date.now();
+
+        // Contador de tempo
+        setInterval(function() {
+            const seconds = Math.floor((Date.now() - startTime) / 1000);
+            const element = document.getElementById('timeActive');
+            if (element) {
+                element.textContent = seconds + 's';
+            }
+        }, 1000);
+
+        function showSection(section) {
+            clicks++;
+            document.getElementById('clickCount').textContent = clicks;
+            
+            // Esconder todas as seções
+            document.getElementById('greeting-section').style.display = 'none';
+            document.getElementById('stats-section').style.display = 'none';
+            
+            // Mostrar seção selecionada
+            if (section === 'greeting') {
+                document.getElementById('greeting-section').style.display = 'block';
+            } else if (section === 'stats') {
+                document.getElementById('stats-section').style.display = 'block';
+            } else if (section === 'config') {
+                alert('⚙️ Configurações: Em desenvolvimento!');
+            } else if (section === 'help') {
+                alert('❓ Ajuda: Use este app para testar as funcionalidades do Pipefy!');
+            }
+        }
+
+        console.log('✅ Painel Principal carregado!');
+    </script>
+</body>
+</html>

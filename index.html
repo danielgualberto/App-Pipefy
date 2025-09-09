@@ -10,35 +10,17 @@
             padding: 20px;
             background: #f5f7fa;
         }
-        .welcome {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 { color: #2c3e50; }
-        .emoji { font-size: 2em; }
-        .info-box {
-            background: #e8f4fd;
-            border-left: 4px solid #0081ff;
-            padding: 15px;
-            margin: 20px 0;
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="welcome">
-        <h1>🌍 Olá, Mundo!</h1>
-        <p>Este é seu app Pipefy demonstrativo!</p>
-        <div class="info-box">
-            <strong>✨ Recursos ativos:</strong>
-            <ul>
-                <li>Botões no Pipe</li>
-                <li>Botões no Card</li>
-                <li>Badges no Card</li>
-                <li>Abas no Card</li>
-            </ul>
-        </div>
+    <div class="loading">
+        <h2>🚀 Inicializando App Olá Mundo...</h2>
+        <p>Carregando recursos do Pipefy...</p>
     </div>
 
     <!-- Pipefy Client SDK -->
@@ -48,68 +30,29 @@
         // Inicialização do App
         PipefyApp.initCall({
             
-            // 🎯 PIPE BUTTONS - Botões no topo do Pipe
+            // 🎯 PIPE BUTTONS - Botão no topo do Pipe
             'pipe-buttons': function(p, pipe) {
                 return [
                     {
                         icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                         text: 'Olá Mundo',
                         callback: function(p) {
-                            // Abre dropdown com opções
-                            p.dropdown({
-                                title: '🌍 Menu Olá Mundo',
-                                items: [
-                                    {
-                                        title: '👋 Saudação',
-                                        callback: function(p) {
-                                            p.modal({
-                                                title: 'Saudação Personalizada',
-                                                url: './pages/saudacao.html',
-                                                height: 400
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: '📊 Dashboard',
-                                        callback: function(p) {
-                                            p.sidebar({
-                                                title: 'Dashboard do App',
-                                                url: './pages/dashboard.html'
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: '⚙️ Configurações',
-                                        callback: function(p) {
-                                            p.sidebar({
-                                                title: 'Configurações',
-                                                url: './pages/config.html'
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: '📚 Ajuda',
-                                        callback: function(p) {
-                                            p.modal({
-                                                title: 'Central de Ajuda',
-                                                url: './pages/ajuda.html',
-                                                height: 500
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: 'Teste Rápido',
-                                        callback: function(p) {
-                                            // Exemplo de ação direta
-                                            p.showNotification('✅ Teste executado com sucesso!');
-                                            
-                                            // Log no console para debug
-                                            console.log('Pipe atual:', pipe);
-                                            console.log('ID do Pipe:', pipe.id);
-                                            console.log('Nome do Pipe:', pipe.name);
-                                        }
-                                    }
-                                ]
+                            // Abre sidebar com o painel principal
+                            p.sidebar({
+                                title: '🌍 Olá Mundo - Painel Principal',
+                                url: './pages/main-panel.html'
+                            });
+                        }
+                    },
+                    {
+                        icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359', 
+                        text: 'Teste Rápido',
+                        callback: function(p) {
+                            // Abre modal de teste
+                            p.modal({
+                                title: '🧪 Área de Testes',
+                                url: './pages/test-area.html',
+                                height: 600
                             });
                         }
                     }
@@ -117,156 +60,63 @@
             },
             
             // 🎨 CARD BUTTONS - Botões no Card
-            'card-buttons': function(p, pipe, card) {
+            'card-buttons': function(p, pipe) {
                 return [
                     {
                         icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                         text: 'Olá Card',
                         callback: function(p) {
-                            p.dropdown({
-                                title: '🎴 Ações do Card',
-                                items: [
-                                    {
-                                        title: '📝 Ver Detalhes',
-                                        callback: function(p) {
-                                            p.modal({
-                                                title: 'Detalhes do Card #' + card.id,
-                                                url: './pages/card-details.html?id=' + card.id,
-                                                height: 400
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: '🏷️ Adicionar Tag',
-                                        callback: function(p) {
-                                            p.modal({
-                                                title: 'Adicionar Tag',
-                                                url: './pages/add-tag.html',
-                                                height: 300
-                                            });
-                                        }
-                                    },
-                                    {
-                                        title: '📊 Estatísticas',
-                                        callback: function(p) {
-                                            p.sidebar({
-                                                title: 'Estatísticas do Card',
-                                                url: './pages/card-stats.html'
-                                            });
-                                        }
-                                    }
-                                ]
+                            // Abre sidebar específica do card
+                            p.sidebar({
+                                title: '🎴 Detalhes do Card',
+                                url: './pages/card-details.html'
                             });
-                        }
-                    },
-                    {
-                        icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
-                        text: 'Ação Rápida',
-                        callback: function(p) {
-                            // Ação direta no card
-                            p.showSuccess('Card processado!');
-                            
-                            // Atualizar badge (exemplo)
-                            console.log('Card processado:', card.title);
                         }
                     }
                 ];
             },
             
             // 🏷️ CARD BADGES - Badges do Card
-            'card-badges': function(p, pipe, card) {
-                // Badges dinâmicos baseados no card
-                const badges = [];
-                
-                // Badge de exemplo 1
-                badges.push({
-                    text: 'Olá!',
-                    color: '#4CAF50', // Verde
-                    title: 'Este é um badge de saudação'
-                });
-                
-                // Badge condicional
-                if (card.title && card.title.toLowerCase().includes('urgente')) {
-                    badges.push({
-                        text: '🔥 Urgente',
-                        color: '#FF5722', // Vermelho
-                        title: 'Card marcado como urgente'
-                    });
-                }
-                
-                // Badge com contador
-                badges.push({
-                    text: '👁️ ' + Math.floor(Math.random() * 100),
-                    color: '#2196F3', // Azul
-                    title: 'Visualizações do card'
-                });
-                
-                return badges;
+            'card-badges': function(p, pipe) {
+                return [
+                    {
+                        text: '👋 Olá!',
+                        color: '#4CAF50',
+                        title: 'Badge de saudação'
+                    },
+                    {
+                        text: '⭐ Demo',
+                        color: '#FF9800',
+                        title: 'App demonstrativo'
+                    },
+                    {
+                        text: '🚀 v1.0',
+                        color: '#2196F3',
+                        title: 'Versão do app'
+                    }
+                ];
             },
             
             // 📑 CARD TAB - Nova aba no Card
-            'card-tab': function(p, pipe, card) {
+            'card-tab': function(p, pipe) {
                 return {
                     icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
                     title: 'Olá Mundo',
-                    url: './pages/card-tab.html',
-                    
-                    // Gerenciar anexos específicos (opcional)
-                    claimedAttachments: function(attachments) {
-                        // Filtrar anexos que pertencem ao app
-                        return attachments.filter(function(attachment) {
-                            return attachment.url.includes('hello-world-app');
-                        });
-                    },
-                    
-                    // Botões na aba
+                    url: './pages/hello-tab.html',
                     buttons: [
                         {
-                            text: '➕ Adicionar Item',
+                            text: 'Testar Função',
+                            callback: function(p) {
+                                p.showNotification('✅ Teste executado com sucesso!');
+                            }
+                        },
+                        {
+                            text: 'Abrir Ajuda',
                             callback: function(p) {
                                 p.modal({
-                                    title: 'Adicionar Novo Item',
-                                    url: './pages/add-item.html',
+                                    title: '📚 Ajuda',
+                                    url: './pages/help.html',
                                     height: 400
-                                });
-                            }
-                        },
-                        {
-                            text: '🔄 Sincronizar',
-                            callback: function(p) {
-                                // Simular sincronização
-                                p.showNotification('Sincronizando...');
-                                
-                                setTimeout(function() {
-                                    p.showSuccess('✅ Sincronizado com sucesso!');
-                                }, 2000);
-                            }
-                        },
-                        {
-                            text: '📤 Exportar',
-                            callback: function(p) {
-                                p.dropdown({
-                                    title: 'Exportar Dados',
-                                    items: [
-                                        {
-                                            title: '📄 PDF',
-                                            callback: function() {
-                                                p.showNotification('Exportando para PDF...');
-                                            }
-                                        },
-                                        {
-                                            title: '📊 Excel',
-                                            callback: function() {
-                                                p.showNotification('Exportando para Excel...');
-                                            }
-                                        },
-                                        {
-                                            title: '📝 CSV',
-                                            callback: function() {
-                                                p.showNotification('Exportando para CSV...');
-                                            }
-                                        }
-                                    ]
                                 });
                             }
                         }
@@ -275,8 +125,9 @@
             }
         });
         
-        // Log de inicialização
-        console.log('🚀 App Olá Mundo inicializado com sucesso!');
+        // Log de confirmação
+        console.log('✅ App Olá Mundo inicializado!');
+        console.log('📍 Features registradas: pipe-buttons, card-buttons, card-badges, card-tab');
     </script>
 </body>
 </html>

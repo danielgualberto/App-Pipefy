@@ -1,0 +1,14 @@
+{
+  "icon": "https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359",
+  "name": "Olá Mundo - Pipefy App",
+  "author": "Desenvolvedor Teste",
+  "features": [
+    "pipe-buttons"
+  ],
+  "init_url": "./",
+  "description": "Este é um app de demonstração que adiciona um botão ao pipe que exibe uma mensagem 'Olá Mundo'. Criado para testar a integração com o framework de apps do Pipefy.",
+  "screenshots": [
+    "https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Fnew-whatsapp-emojis.jpg?1505355622244"
+  ],
+  "short_description": "App de teste simples que adiciona um botão 'Olá Mundo' ao pipe."
+}

@@ -96,22 +96,21 @@
                                                 height: 500
                                             });
                                         }
+                                    },
+                                    {
+                                        title: 'Teste Rápido',
+                                        callback: function(p) {
+                                            // Exemplo de ação direta
+                                            p.showNotification('✅ Teste executado com sucesso!');
+                                            
+                                            // Log no console para debug
+                                            console.log('Pipe atual:', pipe);
+                                            console.log('ID do Pipe:', pipe.id);
+                                            console.log('Nome do Pipe:', pipe.name);
+                                        }
                                     }
                                 ]
                             });
-                        }
-                    },
-                    {
-                        icon: 'https://cdn.glitch.com/03813ab1-4482-45be-b7f7-74e8948d7ae7%2Femoji-icon.svg?1505355049359',
-                        text: 'Teste Rápido',
-                        callback: function(p) {
-                            // Exemplo de ação direta
-                            p.showNotification('✅ Teste executado com sucesso!');
-                            
-                            // Log no console para debug
-                            console.log('Pipe atual:', pipe);
-                            console.log('ID do Pipe:', pipe.id);
-                            console.log('Nome do Pipe:', pipe.name);
                         }
                     }
                 ];

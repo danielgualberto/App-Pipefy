@@ -4,7 +4,7 @@
   "description": "Este app demonstra todas as funcionalidades disponíveis do Pipefy. Perfeito para aprender! 🚀",
   "icon": "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f30d.svg",
   "author": "Daniel Gualberto",
-  "init_url": "https://danielgualberto.github.io/App-Pipefy/",
+  "init_url": "./",
   "screenshots": [
     "https://placehold.co/600x400?text=Demo%201",
     "https://placehold.co/600x400?text=Demo%202"
